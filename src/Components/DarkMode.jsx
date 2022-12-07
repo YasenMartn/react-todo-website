@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import { IconButton } from "@mui/material";
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -11,17 +11,22 @@ const DarkMode = () => {
   const element = document.documentElement;
   const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-  const onWindowMatch = () => {
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) && darkQuery.matches)
-    ) {
+  const onWindowMatch = useCallback(() => {
+    if (localStorage.theme === "dark" || (!("theme" in localStorage) && darkQuery.matches)) {
       element.classList.add("dark");
     } else {
       element.classList.remove("dark");
     }
-  };
-  onWindowMatch();
+  }, [darkQuery, element])
+
+  // const onWindowMatch = () => {
+  //   if (localStorage.theme === "dark" || (!("theme" in localStorage) && darkQuery.matches)) {
+  //     element.classList.add("dark");
+  //   } else {
+  //     element.classList.remove("dark");
+  //   }
+  // };
+  // onWindowMatch();
 
   useEffect(() => {
     switch (theme) {
@@ -38,7 +43,7 @@ const DarkMode = () => {
         onWindowMatch();
         break;
     }
-  }, [theme]);
+  }, [theme, element.classList, onWindowMatch]);
 
   // auto detect theme change in os
   darkQuery.addEventListener("change", (e) => {
@@ -50,6 +55,9 @@ const DarkMode = () => {
       }
     }
   });
+
+ 
+
   return (
     <div className="absolute top-0 right-0 ">
       <IconButton onClick={() => {theme === "light" ? setTheme("dark") : setTheme("light")}}>
