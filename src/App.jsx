@@ -7,7 +7,6 @@ import Fade from '@mui/material/Fade';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
-import { motion } from "framer-motion"
 import toast from 'react-hot-toast';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -130,9 +129,9 @@ const App = () => {
     <div className="w-full flex flex-col items-center justify-start min-h-[100vh] bg-white dark:bg-slate-900 relative overflow-hidden">
 
       {/* delete all button */}
-      <div className="absolute top-0 left-0 z-20">
-        <IconButton onClick={() => deleteTodos()}>
-          <DeleteIcon fontSize="large" className='dark:text-white'/>                
+      <div className="absolute top-5 left-5 z-20">
+        <IconButton onClick={() => deleteTodos()} className="dark:text-white">
+          <DeleteIcon />                
         </IconButton>
       </div>
 
@@ -140,8 +139,8 @@ const App = () => {
       <DarkMode />
 
       {/* circle */}
-      <div className='w-[500px] h-[500px] absolute -bottom-[250px] -right-[250px] bg-purple-1 rounded-full blur-[100px]'></div>
-      <div className='w-[500px] h-[500px] absolute -top-[250px] -left-[250px] bg-purple-1 rounded-full blur-[100px]'></div>
+      {/* <div className='w-[500px] h-[500px] absolute -bottom-[250px] -right-[250px] bg-purple-1 rounded-full blur-[100px]'></div>
+      <div className='w-[500px] h-[500px] absolute -top-[250px] -left-[250px] bg-purple-1 rounded-full blur-[100px]'></div> */}
 
 
       <div className="w-full flex flex-col items-center justify-start space-y-5 p-5 pb-0">
@@ -160,9 +159,9 @@ const App = () => {
      
       
         {/* todo section */}
-        <motion.div layout className='bg-gray-2 dark:bg-slate-600 md:w-[700px] w-full rounded-md z-20'>
+        <div className='bg-gray-2 dark:bg-slate-600 md:w-[700px] w-full rounded-md z-20'>
           {filteredTodoList.length > 0 ? 
-            <motion.div layout className='space-y-5 p-5'>
+            <div className='space-y-5 p-5'>
               {filteredTodoList.map(i => (
                 <div  key={i.id}
                   className='bg-white px-3 pr-0 py-2 rounded-md flex items-center justify-between dark:bg-slate-800 dark:text-white' 
@@ -183,26 +182,26 @@ const App = () => {
                     </div>
                   </div>
                   <div className='flex flex-row items-center justify-center'>
-                    <IconButton onClick={() => openToEdit(i)}>
+                    <IconButton onClick={() => openToEdit(i)} className="dark:text-white">
                       <EditIcon className='dark:text-white'/>                
                     </IconButton>
-                    <IconButton onClick={() => deleteTodo(i.id)}>
+                    <IconButton onClick={() => deleteTodo(i.id)} className="dark:text-white">
                       <DeleteIcon className='dark:text-white'/>                
                     </IconButton>
                   </div>
                 </div>
               ))}
-            </motion.div> 
+            </div> 
           :   
-          <motion.div layout className='flex items-center justify-center flex-col p-5 space-y-2 bg-gray-2 dark:bg-slate-800 rounded-md'>
+          <div  className='flex items-center justify-center flex-col p-5 space-y-2 bg-gray-2 dark:bg-slate-800 rounded-md'>
             <img src="/emptyp.png" alt="empty" className='w-40 h-40 object-contain' />
             <span className='font-bold text-black-2 dark:text-white text-2xl'>NO TODOS!</span>
             <span className='font-medium text-black-2 dark:text-slate-400 text-base'>Your todo app is empty</span>
             <span className='font-medium text-black-2 dark:text-slate-400 text-base'>Let's add some todos shall we ?</span>
             <Button bg="bg-purple-1 text-white" onClick={handleOpen}>Add Task</Button>
-          </motion.div> 
+          </div> 
           }
-        </motion.div>
+        </div>
 
       </div>
 

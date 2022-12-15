@@ -59,12 +59,12 @@ const DarkMode = () => {
  
 
   return (
-    <div className="absolute top-0 right-0 ">
-      <IconButton onClick={() => {theme === "light" ? setTheme("dark") : setTheme("light")}}>
+    <div className="absolute top-5 right-5">
+      <IconButton onClick={() => {theme === "light" ? setTheme("dark") : setTheme("light")}} className="dark:text-white">
         {theme === "light" ? 
-        <DarkModeOutlinedIcon fontSize="large"/>
+        <DarkModeOutlinedIcon/>
         :
-        <LightModeIcon className="dark:text-white" fontSize="large"/> 
+        <LightModeIcon className="dark:text-white"/> 
         }
       </IconButton>
     </div>
